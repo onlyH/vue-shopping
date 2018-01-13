@@ -3,7 +3,9 @@ new Vue({
     el: "#app",
     //模型
     data: {
+        //商品列表
         productList: [],
+        //总金额
         totalMoney: 0,
         checkAll: false,
         delFlag: false,
@@ -22,6 +24,7 @@ new Vue({
         cartView: function () {
             var _this = this;
             this.$http.get("data/cartData.json", {"id": 123}).then(function (res) {
+                //将list列表赋给productList
                 _this.productList = res.body.result.list;
                 // _this.totalMoney = res.body.result.totalMoney;
             })
@@ -37,6 +40,7 @@ new Vue({
             }
             this.calcTotalPrice();
         },
+        //选中商品的方法
         selectProduct: function (item) {
             if (typeof item.checked == "undefined") {
                 Vue.set(item, "checked", true);
@@ -46,6 +50,7 @@ new Vue({
             }
             this.calcTotalPrice();
         },
+        //全选，取消全选
         selectAllFlag: function (flag) {
             this.checkAll = flag;
             var _this = this;

@@ -104,15 +104,20 @@
                         </div>
                         <ul class="cart-item-list">
                             <li v-for="item in productList">
+                                <!--商品信息-->
                                 <div class="cart-tab-1">
                                     <div class="cart-item-check">
                                         <a href="javascript:;" class="item-check-btn"
                                            v-bind:class="{'check':item.checked}" @click="selectProduct(item)"></a>
                                     </div>
                                     <div class="cart-item-pic">
+                                        <!--在此不能使用{{}},会当成路径解析-->
                                         <img v-bind:src="item.productImage" alt="手套">
                                     </div>
                                     <div class="cart-item-title">
+                                       <!-- 1.0加索引$index
+                                        2.0会报错，v-for="(item,index) in productList
+                                                    {{item.productName + index}}-->
                                         <div class="item-name">{{item.productName}}</div>
                                     </div>
                                     <div class="item-include">
@@ -122,9 +127,11 @@
                                         </dl>
                                     </div>
                                 </div>
+                                <!--商品单价-->
                                 <div class="cart-tab-2">
                                     <div class="item-price">{{item.productPrice | formatMoney}}</div>
                                 </div>
+                                <!--改变商品数量-->
                                 <div class="cart-tab-3">
                                     <div class="item-quantity">
                                         <div class="select-self select-self-open">
@@ -137,11 +144,13 @@
                                         <div class="item-stock">有货</div>
                                     </div>
                                 </div>
+                                <!--商品总金额-->
                                 <div class="cart-tab-4">
                                     <div class="item-price-total">{{item.productPrice*item.productQuentity |
                                         Money("美元")}}
                                     </div>
                                 </div>
+                                <!--编辑-->
                                 <div class="cart-tab-5">
                                     <div class="cart-item-operation">
                                         <a href="javascript:;" class="item-edit-btn" @click="delConfirm(item)">
